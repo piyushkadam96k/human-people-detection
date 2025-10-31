@@ -104,7 +104,6 @@ cv2.destroyAllWindows()
 📧 kadamamit462@gmail.com  
 📍 Bhalki, India  
 
----
 
-## 📜 License
-This project is open-source and available under the [MIT License](LICENSE).
+
+
