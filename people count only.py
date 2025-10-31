@@ -1,42 +1,38 @@
-from ultralytics import YOLO      # YOLOv8 model from Ultralytics
+from ultralytics import YOLO      # Import YOLOv8 model from Ultralytics
 import cv2                        # OpenCV for video capture and drawing
-import time                       # Time module for FPS calculation
+import time                       # Time module for calculating FPS
 
-# Load YOLOv8 nano model (fastest version)
-model = YOLO("yolov8n.pt")
-
-# Move model to GPU (RTX 2050) for faster inference
-model.to('cuda')  # If CUDA is available, this uses your GPU
+# Load YOLOv8 nano model (smallest and fastest version)
+model = YOLO("yolov8n.pt")        # Pretrained on COCO dataset
 
 # Open webcam or IP camera stream
 cap = cv2.VideoCapture("The Fate of the Furious ｜ Harpooning Dom's Car.mp4")  # Replace with 0 for local webcam
 
+# Start the main loop for real-time detection
 while True:
-    start_time = time.time()  # Start timer for FPS calculation
+    start_time = time.time()      # Record start time for FPS calculation
 
-    ret, frame = cap.read()   # Read a frame from the video stream
+    ret, frame = cap.read()       # Read a frame from the video stream
     if not ret:
-        break  # Exit loop if no frame is received
+        break                     # Exit loop if frame not received
 
-    # Resize frame to medium resolution for faster processing
-    frame = cv2.resize(frame, (640, 400))
+    # Resize frame to reduce processing load and improve speed
+    frame = cv2.resize(frame, (640, 400))  # Resize to 640x400 pixels
 
-    # Run YOLOv8 detection on the frame (on GPU)
-    results = model(frame)
+    # Run YOLOv8 detection on the frame
+    results = model(frame)        # Returns detection results
+    detections = results[0].boxes.data  # Extract bounding box data
 
-    # Extract bounding box data from results
-    detections = results[0].boxes.data
-    count = 0  # Initialize person counter
+    count = 0                     # Initialize person counter
 
     # Loop through each detected object
     for box in detections:
-        # Extract box coordinates, confidence score, and class ID
-        x1, y1, x2, y2, score, cls_id = box[:6]
-        cls_id = int(cls_id)
+        x1, y1, x2, y2, score, cls_id = box[:6]  # Get box coordinates, confidence, and class ID
+        cls_id = int(cls_id)      # Convert class ID to integer
 
         # Check if the detected object is a person
         if model.names[cls_id] == 'person':
-            count += 1  # Increment person count
+            count += 1            # Increment person count
 
             # Convert coordinates to integers for drawing
             x1, y1, x2, y2 = map(int, [x1, y1, x2, y2])
@@ -62,7 +58,7 @@ while True:
                 cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 0), 1)
 
     # Show the final frame with annotations
-    cv2.imshow("People Counter", frame)
+    cv2.imshow("ESP People Counter", frame)
 
     # Exit loop if 'q' key is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
