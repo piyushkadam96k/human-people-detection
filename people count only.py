@@ -6,7 +6,7 @@ import time                       # Time module for calculating FPS
 model = YOLO("yolov8n.pt")        # Pretrained on COCO dataset
 
 # Open webcam or IP camera stream
-cap = cv2.VideoCapture("The Fate of the Furious ｜ Harpooning Dom's Car.mp4")  # Replace with 0 for local webcam
+cap = cv2.VideoCapture(" add vedio or just add 0 for webcam.mp4")  # Replace with 0 for local webcam
 
 # Start the main loop for real-time detection
 while True:
@@ -67,3 +67,4 @@ while True:
 # Release video stream and close all OpenCV windows
 cap.release()
 cv2.destroyAllWindows()
+
