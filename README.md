@@ -28,7 +28,7 @@ pip install ultralytics opencv-python
 ---
 
 ## 💻 Usage
-1. Place your video file (e.g., `The Fate of the Furious ｜ Harpooning Dom's Car.mp4`) in the same directory.
+1. Place your video file (e.g., `add any video.mp4`) in the same directory.
 2. Run the script:
 ```bash
 python people_counter.py
@@ -37,7 +37,7 @@ python people_counter.py
 
 > 💡 To use a webcam instead of a video file, replace:
 > ```python
-> cap = cv2.VideoCapture("The Fate of the Furious ｜ Harpooning Dom's Car.mp4")
+> cap = cv2.VideoCapture("add any video.mp4")
 > ```
 > with:
 > ```python
