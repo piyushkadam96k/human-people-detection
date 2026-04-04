@@ -99,10 +99,6 @@ cv2.destroyAllWindows()
 
 ---
 
-## 🧑‍💻 Author
-**Amit Kadam**  
-📧 kadamamit462@gmail.com  
-📍 Bhalki, India  
 
 
 
